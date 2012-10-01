@@ -1,0 +1,14 @@
+diff -aurN udisks-1.98.0.orig/src/udiskslinuxfilesystem.c udisks-1.98.0/src/udiskslinuxfilesystem.c
+--- udisks-1.98.0.orig/src/udiskslinuxfilesystem.c	2012-06-13 20:32:58.445879667 +0200
++++ udisks-1.98.0/src/udiskslinuxfilesystem.c	2012-06-13 20:39:35.934910369 +0200
+@@ -296,8 +296,8 @@
+ 
+ /* ---------------------- udf -------------------- */
+ 
+-static const gchar *udf_defaults[] = { "uid=", "gid=", "iocharset=utf8", "umask=0077", NULL };
+-static const gchar *udf_allow[] = { "iocharset=", "umask=", NULL };
++static const gchar *udf_defaults[] = { "uid=", "gid=", "iocharset=utf8", "mode=0400", "dmode=0500", NULL };
++static const gchar *udf_allow[] = { "iocharset=", "umask=", "mode=", "dmode=", NULL };
+ static const gchar *udf_allow_uid_self[] = { "uid=", NULL };
+ static const gchar *udf_allow_gid_self[] = { "gid=", NULL };
+ 
