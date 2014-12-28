@@ -1,11 +1,11 @@
 Summary:	Disk Management Service
 Name:		udisks2
-Version:	2.1.3
-Release:	2
+Version:	2.1.4
+Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://udisks.freedesktop.org/releases/udisks-%{version}.tar.bz2
-# Source0-md5:	f2c793f839058371d1e93a654199438d
+# Source0-md5:	2a3c9206b8f672d007e035988e3c3386
 Patch0:		%{name}-udf.patch
 URL:		http://www.freedesktop.org/wiki/Software/udisks
 BuildRequires:	autoconf
@@ -56,6 +56,14 @@ Requires:	gtk-doc-common
 %description apidocs
 API documentation for udisks2 library.
 
+%package -n bash-completion-%{name}
+Summary:	BASH auto-complete site functions
+Group:		Documentation
+Requires:	bash
+
+%description -n bash-completion-%{name}
+BASH auto-complete site functions.
+
 %prep
 %setup -qn udisks-%{version}
 %patch0 -p1
@@ -88,6 +96,8 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
+
 %find_lang %{name}
 
 %clean
@@ -111,6 +121,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/udisksctl.1*
 %{_mandir}/man8/udisks.8*
 %{_mandir}/man8/udisksd.8*
+%{_mandir}/man8/umount.udisks2*
 %attr(700,root,root) /var/lib/udisks2
 
 %files libs
@@ -129,4 +140,8 @@ rm -rf $RPM_BUILD_ROOT
 %files apidocs
 %defattr(644,root,root,755)
 %{_gtkdocdir}/udisks2
+
+%files -n bash-completion-%{name}
+%attr(755,root,root)
+%{_datadir}/bash-completion/completions/udisksctl
 
